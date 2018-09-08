@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+      <div class="container">
+        <h1>Movie List</h1>
+        <button type="button" name="create_movie"><a href="{% url 'create_movie' %}">add</a></button>
+        <ul style="list-style: none">
+          {% for movie in movies %}
+
+          <li>
+        {{ movie.title }} |
+        <button type="button" name="view_movies" class="btn btn-info"><a href="{% url 'detail_movies' movie.id %}" style="color:white">view</a></button> |
+        <button type="button" name="update_movie" class="btn btn-warning"><a href="{% url 'update_movie' movie.id %}" style="color:white">edit</a></button> |
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete</h4>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you like to delete this?</p>
+              </div>
+              <form class="form-group" method="post" action="{% url 'delete_movie' movie.id %}">
+                {% csrf_token %}
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <input class="btn btn-primary" type="submit" value="Save" />
+                  <!-- <button type="submit" name="delete_movie"><a href="{% url 'delete_movie' movie.id %}">Delete</a></button> | -->
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </li>
+      <form id="like_total" action="{% url 'like_total' movie.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden">
+      </form>
+      {% endfor %}
+    </ul>
+    </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<h1>Are you sure you like to delete this?</h1>
+<form method="post">
+
+  {% csrf_token %}
+  <button type="button" name="cancel_movie"><a href="{% url 'list_movies' %}">Cancel</a></button>
+  <button type="submit" name="delete_movie">OK</button>
+
+</form>
