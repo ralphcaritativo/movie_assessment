@@ -52,9 +52,11 @@ def delete_movie(request, id):
         # return render(request, 'movies/list_movies.html', {'movie': movie})
 
 
+
 def like_total(request, id):
     if request.method == "POST":
         movie = Movie.objects.get(id=id)
         movie.like_total += 1
         movie.save()
         return redirect('list_movies')
+        # return redirect('list_movies', +str(movie.id))

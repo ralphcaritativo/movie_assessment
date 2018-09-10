@@ -1,6 +1,15 @@
+{% extends 'base.html' %}
 
+{% block title %}<h1>Movie Form</h1>{% endblock %}
+
+{% block content %}
 <form method="post">
   {% csrf_token %}
+  <div class="form-group">
   {{ form }}
-  <button type="submit" name="save_movie">Save</button>
+  <a  href="{% url 'list_movies' %}" class="btn btn-secondary" role="button">Cancel</a>
+  <button class="btn btn-primary" type="submit" name="save_movie">Save</button>
+  </div>
+
 </form>
+{% endblock %}

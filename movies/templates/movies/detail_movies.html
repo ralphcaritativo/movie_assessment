@@ -1,11 +1,22 @@
+{% extends 'base.html' %}
 
-<h1>This is Detail View</h1>
+{% block title %}<h1>Movie Title</h1>{% endblock %}
+
+{% block content %}
 {% if messages %}
-  <ul class="messages">
+<div class="alert alert-success" role="alert">
+  <ul class="messages" style="none">
     {% for message in messages %}
       <li class="{{ message.tags }}">{{ message }}</li>
     {% endfor %}
   </ul>
+</div>
+
 {% endif %}
 
-{{ movies.title }}
+<h3>{{ movies.title }}</h3>
+<a  href="{% url 'list_movies' %}" class="btn btn-secondary btn-lg active" role="button">Back</a>
+
+
+
+{% endblock %}
